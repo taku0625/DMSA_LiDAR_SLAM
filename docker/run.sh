@@ -1,5 +1,5 @@
 #!/bin/bash
-docker run --net=host -it --rm \
+docker run -it --rm \
            --privileged \
            --gpus all \
            -e DISPLAY=$DISPLAY \
