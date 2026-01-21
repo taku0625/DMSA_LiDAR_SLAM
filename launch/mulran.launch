@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+
+<launch>
+
+  <node name="dmsa_slam_ros" pkg="dmsa_slam_ros" type="dmsa_slam_ros" output="screen" required="true">
+    <rosparam command="load" file="$(find dmsa_slam_ros)/config/slam_settings.yaml" />
+    <rosparam command="load" file="$(find dmsa_slam_ros)/config/mulran.yaml" />
+    <param name="bag_dirs" value="$(arg bag_dirs)" />
+    <param name="result_dir" value="$(arg result_dir)" />
+    <param name="max_distance_ds" value="$(arg max_distance_ds)" />
+  </node>
+
+</launch>

@@ -42,6 +42,9 @@ dmsa_slam_ros::dmsa_slam_ros()
     nh.getParam("min_distance_ds", config.minDistDS);
     std::cout << "min_distance_ds: " << config.minDistDS << std::endl;
 
+    nh.getParam("max_distance_ds", config.maxDistDS);
+    std::cout << "max_distance_ds: " << config.maxDistDS << std::endl;
+
     nh.getParam("min_dist", config.min_dist);
     std::cout << "min_dist: " << config.min_dist << std::endl;
 
@@ -267,42 +270,48 @@ void dmsa_slam_ros::spin()
 
         rosbag::View view(bag, rosbag::TopicQuery(topics));
 
+        bool initialized = true;
         for (rosbag::MessageInstance const m : view)
         {
             sensor_msgs::PointCloud2::ConstPtr pc2Ptr = m.instantiate<sensor_msgs::PointCloud2>();
 
             if (pc2Ptr != nullptr)
+            {
                 callbackPointCloud(pc2Ptr);
+                initialized = true;
+            }
 
             sensor_msgs::Imu::ConstPtr imuDataPtr = m.instantiate<sensor_msgs::Imu>();
 
-            if (imuDataPtr != nullptr)
+            if (imuDataPtr != nullptr && initialized)
+            {
                 callbackImuData(imuDataPtr);
+            }
         }
 
         bag.close();
     }
 
     // Save the cloud to a .pcd file
-    std::string filename = result_dir + "/PointCloud.pcd";
-    if (io::savePCDFileASCII(filename, DmsaSLAMObj.KeyframeMap.globalPoints) == -1)
-    {
-        PCL_ERROR("Failed to save PCD file\n");
-    }
+    // std::string filename = result_dir + "/PointCloud.pcd";
+    // if (io::savePCDFileASCII(filename, DmsaSLAMObj.KeyframeMap.globalPoints) == -1)
+    // {
+    //     PCL_ERROR("Failed to save PCD file\n");
+    // }
 
     // save poses
     DmsaSLAMObj.savePoses(result_dir);
 
     std::cout << "Processing of rosbags/s finished . . . " << std::endl;
 
-    ros::Rate rate(1000);
+    // ros::Rate rate(1000);
 
-    while (ros::ok())
-    {
-        ros::spinOnce();
+    // while (ros::ok())
+    // {
+    //     ros::spinOnce();
 
-        rate.sleep();
-    }
+    //     rate.sleep();
+    // }
 
 }
 
@@ -448,7 +457,7 @@ void dmsa_slam_ros::callbackPointCloud(const sensor_msgs::PointCloud2::ConstPtr 
         else if (config.sensor == "livoxXYZRTLT_s")
         {
             // stamp and ring
-            memcpy(&tmpStampDouble, &msg->data[arrayPosition + msg->fields[6].offset], sizeof(double));
+            memcpy(&tmpStampDouble, &msg->dcata[arrayPosition + msg->fields[6].offset], sizeof(double));
 
             newPC->at(k).stamp = tmpStampDouble;
 
@@ -498,11 +507,11 @@ void dmsa_slam_ros::callbackPointCloud(const sensor_msgs::PointCloud2::ConstPtr 
         DmsaSLAMObj.savePoses(result_dir);
 
         // Save the cloud to a .pcd file
-        std::string filename = result_dir + "/PointCloud.pcd";
-        if (io::savePCDFileASCII(filename, DmsaSLAMObj.KeyframeMap.globalPoints) == -1)
-        {
-            PCL_ERROR("Failed to save PCD file\n");
-        }
+        // std::string filename = result_dir + "/PointCloud.pcd";
+        // if (io::savePCDFileASCII(filename, DmsaSLAMObj.KeyframeMap.globalPoints) == -1)
+        // {
+        //     PCL_ERROR("Failed to save PCD file\n");
+        // }
     }
 
 

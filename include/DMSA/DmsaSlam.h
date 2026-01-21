@@ -606,7 +606,8 @@ private:
         sort(rangesSorted.begin(), rangesSorted.end());
 
         // find threshold range
-        float thresRange = std::max(rangesSorted[std::min(config.max_num_points_per_scan, (int)(rangesSorted.size() - 1))], config.minDistDS);
+        float thresRange = std::min(config.maxDistDS, std::max(rangesSorted[std::min(config.max_num_points_per_scan, (int)(rangesSorted.size() - 1))], config.minDistDS));
+        std::cout << "thresRange: " << thresRange << std::endl; 
 
         pcl::PointIndices::Ptr inliers(new pcl::PointIndices());
         pcl::ExtractIndices<PointStampId> extract;

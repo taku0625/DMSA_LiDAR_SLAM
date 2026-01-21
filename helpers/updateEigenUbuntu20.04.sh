@@ -13,15 +13,15 @@ unzip eigen-3.4.0.zip
 
 # remove old Eigen
 printf "Remove old Eigen headers in /usr/include/eigen3 . . . \n"
-sudo rm -fr /usr/include/eigen3/Eigen
-sudo rm -fr /usr/include/eigen3/unsupported
-sudo rm /usr/include/eigen3/signature_of_eigen3_matrix_library
+rm -fr /usr/include/eigen3/Eigen
+rm -fr /usr/include/eigen3/unsupported
+rm /usr/include/eigen3/signature_of_eigen3_matrix_library
 
 # move new version
 printf "Move new Eigen headers to /usr/include/eigen3 . . . \n"
-sudo mv eigen-3.4.0/Eigen /usr/include/eigen3/Eigen
-sudo mv eigen-3.4.0/unsupported /usr/include/eigen3/unsupported
-sudo mv eigen-3.4.0/signature_of_eigen3_matrix_library /usr/include/eigen3/signature_of_eigen3_matrix_library
+mv eigen-3.4.0/Eigen /usr/include/eigen3/Eigen
+mv eigen-3.4.0/unsupported /usr/include/eigen3/unsupported
+mv eigen-3.4.0/signature_of_eigen3_matrix_library /usr/include/eigen3/signature_of_eigen3_matrix_library
 
 # remove local Eigen data
 printf "Remove local eigen-3.4.0 directory and eigen-3.4.0.zip . . . \n"

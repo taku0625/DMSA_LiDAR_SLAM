@@ -23,6 +23,7 @@ struct Config
     int last_n_keyframes_for_optim = 10;
     int max_num_points_per_scan = 3000;
     float minDistDS = 30.0;
+    float maxDistDS = 1000.0;
     double alpha_keyframe_optim = 0.3;
     int num_iter_keyframe_optim = 10;
 

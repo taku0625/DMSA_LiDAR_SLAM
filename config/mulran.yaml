@@ -1,0 +1,36 @@
+
+bag_dirs: "/tmp/rosbag/DCC01.bag"
+
+# input
+lidar_topic: "/os1_points"
+imu_topic: "/imu/data_raw"
+
+# output: save resulting poses and point cloud
+# pose format: [timestamp_s tx ty tz qx qy qz qw]
+result_dir: "/tmp/evaluation/DCC01"
+
+
+## LiDAR config ##
+
+# sensor ["hesai","ouster"]
+sensor: "unknown"
+
+# clock time shift
+timeshift_lidar2imu: 0.000
+
+## imu setting ##
+use_imu: true
+sigma_gyr: 0.003
+sigma_acc: 0.1
+
+# extrinsic imu2lidar #
+# rot quaternion
+q_x: -0.000002615435
+q_y: 0.000000880305
+q_z: 0.999995736987
+q_w: 0.002919931692
+
+# translation
+t_x: 1.7742000000
+t_y: -0.0210000000
+t_z: 0.1047000000
