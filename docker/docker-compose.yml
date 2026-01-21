@@ -1,5 +1,5 @@
 services:
-  DCC01:
+  DCC01_1000:
     image: dmsa_lidar_slam
     tty: true
     stdin_open: true
@@ -27,7 +27,7 @@ services:
         roslaunch dmsa_slam_ros mulran.launch bag_dirs:="$$BAG_PATH" result_dir:="$$SAVE_PATH" max_distance_ds:=1000
       '
 
-  DCC02:
+  DCC02_1000:
     image: dmsa_lidar_slam
     tty: true
     stdin_open: true
@@ -55,7 +55,7 @@ services:
         roslaunch dmsa_slam_ros mulran.launch bag_dirs:="$$BAG_PATH" result_dir:="$$SAVE_PATH" max_distance_ds:=1000
       '
 
-  DCC03:
+  DCC03_1000:
     image: dmsa_lidar_slam
     tty: true
     stdin_open: true
@@ -83,7 +83,7 @@ services:
         roslaunch dmsa_slam_ros mulran.launch bag_dirs:="$$BAG_PATH" result_dir:="$$SAVE_PATH" max_distance_ds:=1000
       '
 
-  KAIST01:
+  KAIST01_1000:
     image: dmsa_lidar_slam
     tty: true
     stdin_open: true
@@ -111,7 +111,7 @@ services:
         roslaunch dmsa_slam_ros mulran.launch bag_dirs:="$$BAG_PATH" result_dir:="$$SAVE_PATH" max_distance_ds:=1000
       '
 
-  KAIST02:
+  KAIST02_1000:
     image: dmsa_lidar_slam
     tty: true
     stdin_open: true
@@ -139,7 +139,7 @@ services:
         roslaunch dmsa_slam_ros mulran.launch bag_dirs:="$$BAG_PATH" result_dir:="$$SAVE_PATH" max_distance_ds:=1000
       '
 
-  KAIST03:
+  KAIST03_1000:
     image: dmsa_lidar_slam
     tty: true
     stdin_open: true
@@ -167,7 +167,7 @@ services:
         roslaunch dmsa_slam_ros mulran.launch bag_dirs:="$$BAG_PATH" result_dir:="$$SAVE_PATH" max_distance_ds:=1000
       '
 
-  Riverside01:
+  Riverside01_1000:
     image: dmsa_lidar_slam
     tty: true
     stdin_open: true
@@ -195,7 +195,7 @@ services:
         roslaunch dmsa_slam_ros mulran.launch bag_dirs:="$$BAG_PATH" result_dir:="$$SAVE_PATH" max_distance_ds:=1000
       '
 
-  Riverside02:
+  Riverside02_1000:
     image: dmsa_lidar_slam
     tty: true
     stdin_open: true
@@ -223,7 +223,7 @@ services:
         roslaunch dmsa_slam_ros mulran.launch bag_dirs:="$$BAG_PATH" result_dir:="$$SAVE_PATH" max_distance_ds:=1000
       '
 
-  Riverside03:
+  Riverside03_1000:
     image: dmsa_lidar_slam
     tty: true
     stdin_open: true
@@ -251,6 +251,509 @@ services:
         roslaunch dmsa_slam_ros mulran.launch bag_dirs:="$$BAG_PATH" result_dir:="$$SAVE_PATH" max_distance_ds:=1000
       '
 
+  DCC01_50:
+    image: dmsa_lidar_slam
+    tty: true
+    stdin_open: true
+    privileged: true
+    gpus: all
+    networks:
+      rosnet:
+        ipv4_address: 172.30.0.21
+    environment:
+      - DISPLAY=${DISPLAY}
+      - ROS_IP=172.30.0.21
+      - ROS_MASTER_URI=http://172.30.0.21:11311
+      - BAG_PATH=/tmp/rosbag/DCC01.bag
+      - SAVE_PATH=/tmp/evaluation/DCC01_50
+    volumes:
+      - ${HOME}/.Xauthority:/root/.Xauthority:rw
+      - ..:/root/catkin_ws/src/DMSA_LIDAR_SLAM
+      - /home/nakao/dataset/rosbag/MulRan:/tmp/rosbag
+      - /home/nakao/dataset/evaluation/MulRan/DMSA_LIDAR_SLAM:/tmp/evaluation
+    command: >
+      bash -lc '
+        source /opt/ros/noetic/setup.bash &&
+        roscore & sleep 2 &&
+        mkdir -p "$$SAVE_PATH" &&
+        roslaunch dmsa_slam_ros mulran.launch bag_dirs:="$$BAG_PATH" result_dir:="$$SAVE_PATH" max_distance_ds:=50
+      '
+
+  DCC02_50:
+    image: dmsa_lidar_slam
+    tty: true
+    stdin_open: true
+    privileged: true
+    gpus: all
+    networks:
+      rosnet:
+        ipv4_address: 172.30.0.22
+    environment:
+      - DISPLAY=${DISPLAY}
+      - ROS_IP=172.30.0.22
+      - ROS_MASTER_URI=http://172.30.0.22:11311
+      - BAG_PATH=/tmp/rosbag/DCC02.bag
+      - SAVE_PATH=/tmp/evaluation/DCC02_50
+    volumes:
+      - ${HOME}/.Xauthority:/root/.Xauthority:rw
+      - ..:/root/catkin_ws/src/DMSA_LIDAR_SLAM
+      - /home/nakao/dataset/rosbag/MulRan:/tmp/rosbag
+      - /home/nakao/dataset/evaluation/MulRan/DMSA_LIDAR_SLAM:/tmp/evaluation
+    command: >
+      bash -lc '
+        source /opt/ros/noetic/setup.bash &&
+        roscore & sleep 2 &&
+        mkdir -p "$$SAVE_PATH" &&
+        roslaunch dmsa_slam_ros mulran.launch bag_dirs:="$$BAG_PATH" result_dir:="$$SAVE_PATH" max_distance_ds:=50
+      '
+
+  DCC03_50:
+    image: dmsa_lidar_slam
+    tty: true
+    stdin_open: true
+    privileged: true
+    gpus: all
+    networks:
+      rosnet:
+        ipv4_address: 172.30.0.23
+    environment:
+      - DISPLAY=${DISPLAY}
+      - ROS_IP=172.30.0.23
+      - ROS_MASTER_URI=http://172.30.0.23:11311
+      - BAG_PATH=/tmp/rosbag/DCC03.bag
+      - SAVE_PATH=/tmp/evaluation/DCC03_50
+    volumes:
+      - ${HOME}/.Xauthority:/root/.Xauthority:rw
+      - ..:/root/catkin_ws/src/DMSA_LIDAR_SLAM
+      - /home/nakao/dataset/rosbag/MulRan:/tmp/rosbag
+      - /home/nakao/dataset/evaluation/MulRan/DMSA_LIDAR_SLAM:/tmp/evaluation
+    command: >
+      bash -lc '
+        source /opt/ros/noetic/setup.bash &&
+        roscore & sleep 2 &&
+        mkdir -p "$$SAVE_PATH" &&
+        roslaunch dmsa_slam_ros mulran.launch bag_dirs:="$$BAG_PATH" result_dir:="$$SAVE_PATH" max_distance_ds:=50
+      '
+
+  KAIST01_50:
+    image: dmsa_lidar_slam
+    tty: true
+    stdin_open: true
+    privileged: true
+    gpus: all
+    networks:
+      rosnet:
+        ipv4_address: 172.30.0.24
+    environment:
+      - DISPLAY=${DISPLAY}
+      - ROS_IP=172.30.0.24
+      - ROS_MASTER_URI=http://172.30.0.24:11311
+      - BAG_PATH=/tmp/rosbag/KAIST01.bag
+      - SAVE_PATH=/tmp/evaluation/KAIST01_50
+    volumes:
+      - ${HOME}/.Xauthority:/root/.Xauthority:rw
+      - ..:/root/catkin_ws/src/DMSA_LIDAR_SLAM
+      - /home/nakao/dataset/rosbag/MulRan:/tmp/rosbag
+      - /home/nakao/dataset/evaluation/MulRan/DMSA_LIDAR_SLAM:/tmp/evaluation
+    command: >
+      bash -lc '
+        source /opt/ros/noetic/setup.bash &&
+        roscore & sleep 2 &&
+        mkdir -p "$$SAVE_PATH" &&
+        roslaunch dmsa_slam_ros mulran.launch bag_dirs:="$$BAG_PATH" result_dir:="$$SAVE_PATH" max_distance_ds:=50
+      '
+
+  KAIST02_50:
+    image: dmsa_lidar_slam
+    tty: true
+    stdin_open: true
+    privileged: true
+    gpus: all
+    networks:
+      rosnet:
+        ipv4_address: 172.30.0.25
+    environment:
+      - DISPLAY=${DISPLAY}
+      - ROS_IP=172.30.0.25
+      - ROS_MASTER_URI=http://172.30.0.25:11311
+      - BAG_PATH=/tmp/rosbag/KAIST02.bag
+      - SAVE_PATH=/tmp/evaluation/KAIST02_50
+    volumes:
+      - ${HOME}/.Xauthority:/root/.Xauthority:rw
+      - ..:/root/catkin_ws/src/DMSA_LIDAR_SLAM
+      - /home/nakao/dataset/rosbag/MulRan:/tmp/rosbag
+      - /home/nakao/dataset/evaluation/MulRan/DMSA_LIDAR_SLAM:/tmp/evaluation
+    command: >
+      bash -lc '
+        source /opt/ros/noetic/setup.bash &&
+        roscore & sleep 2 &&
+        mkdir -p "$$SAVE_PATH" &&
+        roslaunch dmsa_slam_ros mulran.launch bag_dirs:="$$BAG_PATH" result_dir:="$$SAVE_PATH" max_distance_ds:=50
+      '
+
+  KAIST03_50:
+    image: dmsa_lidar_slam
+    tty: true
+    stdin_open: true
+    privileged: true
+    gpus: all
+    networks:
+      rosnet:
+        ipv4_address: 172.30.0.26
+    environment:
+      - DISPLAY=${DISPLAY}
+      - ROS_IP=172.30.0.26
+      - ROS_MASTER_URI=http://172.30.0.26:11311
+      - BAG_PATH=/tmp/rosbag/KAIST03.bag
+      - SAVE_PATH=/tmp/evaluation/KAIST03_50
+    volumes:
+      - ${HOME}/.Xauthority:/root/.Xauthority:rw
+      - ..:/root/catkin_ws/src/DMSA_LIDAR_SLAM
+      - /home/nakao/dataset/rosbag/MulRan:/tmp/rosbag
+      - /home/nakao/dataset/evaluation/MulRan/DMSA_LIDAR_SLAM:/tmp/evaluation
+    command: >
+      bash -lc '
+        source /opt/ros/noetic/setup.bash &&
+        roscore & sleep 2 &&
+        mkdir -p "$$SAVE_PATH" &&
+        roslaunch dmsa_slam_ros mulran.launch bag_dirs:="$$BAG_PATH" result_dir:="$$SAVE_PATH" max_distance_ds:=50
+      '
+
+  Riverside01_50:
+    image: dmsa_lidar_slam
+    tty: true
+    stdin_open: true
+    privileged: true
+    gpus: all
+    networks:
+      rosnet:
+        ipv4_address: 172.30.0.27
+    environment:
+      - DISPLAY=${DISPLAY}
+      - ROS_IP=172.30.0.27
+      - ROS_MASTER_URI=http://172.30.0.27:11311
+      - BAG_PATH=/tmp/rosbag/Riverside01.bag
+      - SAVE_PATH=/tmp/evaluation/Riverside01_50
+    volumes:
+      - ${HOME}/.Xauthority:/root/.Xauthority:rw
+      - ..:/root/catkin_ws/src/DMSA_LIDAR_SLAM
+      - /home/nakao/dataset/rosbag/MulRan:/tmp/rosbag
+      - /home/nakao/dataset/evaluation/MulRan/DMSA_LIDAR_SLAM:/tmp/evaluation
+    command: >
+      bash -lc '
+        source /opt/ros/noetic/setup.bash &&
+        roscore & sleep 2 &&
+        mkdir -p "$$SAVE_PATH" &&
+        roslaunch dmsa_slam_ros mulran.launch bag_dirs:="$$BAG_PATH" result_dir:="$$SAVE_PATH" max_distance_ds:=50
+      '
+
+  Riverside02_50:
+    image: dmsa_lidar_slam
+    tty: true
+    stdin_open: true
+    privileged: true
+    gpus: all
+    networks:
+      rosnet:
+        ipv4_address: 172.30.0.28
+    environment:
+      - DISPLAY=${DISPLAY}
+      - ROS_IP=172.30.0.28
+      - ROS_MASTER_URI=http://172.30.0.28:11311
+      - BAG_PATH=/tmp/rosbag/Riverside02.bag
+      - SAVE_PATH=/tmp/evaluation/Riverside02_50
+    volumes:
+      - ${HOME}/.Xauthority:/root/.Xauthority:rw
+      - ..:/root/catkin_ws/src/DMSA_LIDAR_SLAM
+      - /home/nakao/dataset/rosbag/MulRan:/tmp/rosbag
+      - /home/nakao/dataset/evaluation/MulRan/DMSA_LIDAR_SLAM:/tmp/evaluation
+    command: >
+      bash -lc '
+        source /opt/ros/noetic/setup.bash &&
+        roscore & sleep 2 &&
+        mkdir -p "$$SAVE_PATH" &&
+        roslaunch dmsa_slam_ros mulran.launch bag_dirs:="$$BAG_PATH" result_dir:="$$SAVE_PATH" max_distance_ds:=50
+      '
+
+  Riverside03_50:
+    image: dmsa_lidar_slam
+    tty: true
+    stdin_open: true
+    privileged: true
+    gpus: all
+    networks:
+      rosnet:
+        ipv4_address: 172.30.0.29
+    environment:
+      - DISPLAY=${DISPLAY}
+      - ROS_IP=172.30.0.29
+      - ROS_MASTER_URI=http://172.30.0.29:11311
+      - BAG_PATH=/tmp/rosbag/Riverside03.bag
+      - SAVE_PATH=/tmp/evaluation/Riverside03_50
+    volumes:
+      - ${HOME}/.Xauthority:/root/.Xauthority:rw
+      - ..:/root/catkin_ws/src/DMSA_LIDAR_SLAM
+      - /home/nakao/dataset/rosbag/MulRan:/tmp/rosbag
+      - /home/nakao/dataset/evaluation/MulRan/DMSA_LIDAR_SLAM:/tmp/evaluation
+    command: >
+      bash -lc '
+        source /opt/ros/noetic/setup.bash &&
+        roscore & sleep 2 &&
+        mkdir -p "$$SAVE_PATH" &&
+        roslaunch dmsa_slam_ros mulran.launch bag_dirs:="$$BAG_PATH" result_dir:="$$SAVE_PATH" max_distance_ds:=50
+      '
+
+  DCC01_30:
+    image: dmsa_lidar_slam
+    tty: true
+    stdin_open: true
+    privileged: true
+    gpus: all
+    networks:
+      rosnet:
+        ipv4_address: 172.30.0.31
+    environment:
+      - DISPLAY=${DISPLAY}
+      - ROS_IP=172.30.0.31
+      - ROS_MASTER_URI=http://172.30.0.31:11311
+      - BAG_PATH=/tmp/rosbag/DCC01.bag
+      - SAVE_PATH=/tmp/evaluation/DCC01_30
+    volumes:
+      - ${HOME}/.Xauthority:/root/.Xauthority:rw
+      - ..:/root/catkin_ws/src/DMSA_LIDAR_SLAM
+      - /home/nakao/dataset/rosbag/MulRan:/tmp/rosbag
+      - /home/nakao/dataset/evaluation/MulRan/DMSA_LIDAR_SLAM:/tmp/evaluation
+    command: >
+      bash -lc '
+        source /opt/ros/noetic/setup.bash &&
+        roscore & sleep 2 &&
+        mkdir -p "$$SAVE_PATH" &&
+        roslaunch dmsa_slam_ros mulran.launch bag_dirs:="$$BAG_PATH" result_dir:="$$SAVE_PATH" max_distance_ds:=30
+      '
+
+  DCC02_30:
+    image: dmsa_lidar_slam
+    tty: true
+    stdin_open: true
+    privileged: true
+    gpus: all
+    networks:
+      rosnet:
+        ipv4_address: 172.30.0.32
+    environment:
+      - DISPLAY=${DISPLAY}
+      - ROS_IP=172.30.0.32
+      - ROS_MASTER_URI=http://172.30.0.32:11311
+      - BAG_PATH=/tmp/rosbag/DCC02.bag
+      - SAVE_PATH=/tmp/evaluation/DCC02_30
+    volumes:
+      - ${HOME}/.Xauthority:/root/.Xauthority:rw
+      - ..:/root/catkin_ws/src/DMSA_LIDAR_SLAM
+      - /home/nakao/dataset/rosbag/MulRan:/tmp/rosbag
+      - /home/nakao/dataset/evaluation/MulRan/DMSA_LIDAR_SLAM:/tmp/evaluation
+    command: >
+      bash -lc '
+        source /opt/ros/noetic/setup.bash &&
+        roscore & sleep 2 &&
+        mkdir -p "$$SAVE_PATH" &&
+        roslaunch dmsa_slam_ros mulran.launch bag_dirs:="$$BAG_PATH" result_dir:="$$SAVE_PATH" max_distance_ds:=30
+      '
+
+  DCC03_30:
+    image: dmsa_lidar_slam
+    tty: true
+    stdin_open: true
+    privileged: true
+    gpus: all
+    networks:
+      rosnet:
+        ipv4_address: 172.30.0.33
+    environment:
+      - DISPLAY=${DISPLAY}
+      - ROS_IP=172.30.0.33
+      - ROS_MASTER_URI=http://172.30.0.33:11311
+      - BAG_PATH=/tmp/rosbag/DCC03.bag
+      - SAVE_PATH=/tmp/evaluation/DCC03_30
+    volumes:
+      - ${HOME}/.Xauthority:/root/.Xauthority:rw
+      - ..:/root/catkin_ws/src/DMSA_LIDAR_SLAM
+      - /home/nakao/dataset/rosbag/MulRan:/tmp/rosbag
+      - /home/nakao/dataset/evaluation/MulRan/DMSA_LIDAR_SLAM:/tmp/evaluation
+    command: >
+      bash -lc '
+        source /opt/ros/noetic/setup.bash &&
+        roscore & sleep 2 &&
+        mkdir -p "$$SAVE_PATH" &&
+        roslaunch dmsa_slam_ros mulran.launch bag_dirs:="$$BAG_PATH" result_dir:="$$SAVE_PATH" max_distance_ds:=30
+      '
+
+  KAIST01_30:
+    image: dmsa_lidar_slam
+    tty: true
+    stdin_open: true
+    privileged: true
+    gpus: all
+    networks:
+      rosnet:
+        ipv4_address: 172.30.0.34
+    environment:
+      - DISPLAY=${DISPLAY}
+      - ROS_IP=172.30.0.34
+      - ROS_MASTER_URI=http://172.30.0.34:11311
+      - BAG_PATH=/tmp/rosbag/KAIST01.bag
+      - SAVE_PATH=/tmp/evaluation/KAIST01_30
+    volumes:
+      - ${HOME}/.Xauthority:/root/.Xauthority:rw
+      - ..:/root/catkin_ws/src/DMSA_LIDAR_SLAM
+      - /home/nakao/dataset/rosbag/MulRan:/tmp/rosbag
+      - /home/nakao/dataset/evaluation/MulRan/DMSA_LIDAR_SLAM:/tmp/evaluation
+    command: >
+      bash -lc '
+        source /opt/ros/noetic/setup.bash &&
+        roscore & sleep 2 &&
+        mkdir -p "$$SAVE_PATH" &&
+        roslaunch dmsa_slam_ros mulran.launch bag_dirs:="$$BAG_PATH" result_dir:="$$SAVE_PATH" max_distance_ds:=30
+      '
+
+  KAIST02_30:
+    image: dmsa_lidar_slam
+    tty: true
+    stdin_open: true
+    privileged: true
+    gpus: all
+    networks:
+      rosnet:
+        ipv4_address: 172.30.0.35
+    environment:
+      - DISPLAY=${DISPLAY}
+      - ROS_IP=172.30.0.35
+      - ROS_MASTER_URI=http://172.30.0.35:11311
+      - BAG_PATH=/tmp/rosbag/KAIST02.bag
+      - SAVE_PATH=/tmp/evaluation/KAIST02_30
+    volumes:
+      - ${HOME}/.Xauthority:/root/.Xauthority:rw
+      - ..:/root/catkin_ws/src/DMSA_LIDAR_SLAM
+      - /home/nakao/dataset/rosbag/MulRan:/tmp/rosbag
+      - /home/nakao/dataset/evaluation/MulRan/DMSA_LIDAR_SLAM:/tmp/evaluation
+    command: >
+      bash -lc '
+        source /opt/ros/noetic/setup.bash &&
+        roscore & sleep 2 &&
+        mkdir -p "$$SAVE_PATH" &&
+        roslaunch dmsa_slam_ros mulran.launch bag_dirs:="$$BAG_PATH" result_dir:="$$SAVE_PATH" max_distance_ds:=30
+      '
+
+  KAIST03_30:
+    image: dmsa_lidar_slam
+    tty: true
+    stdin_open: true
+    privileged: true
+    gpus: all
+    networks:
+      rosnet:
+        ipv4_address: 172.30.0.36
+    environment:
+      - DISPLAY=${DISPLAY}
+      - ROS_IP=172.30.0.36
+      - ROS_MASTER_URI=http://172.30.0.36:11311
+      - BAG_PATH=/tmp/rosbag/KAIST03.bag
+      - SAVE_PATH=/tmp/evaluation/KAIST03_30
+    volumes:
+      - ${HOME}/.Xauthority:/root/.Xauthority:rw
+      - ..:/root/catkin_ws/src/DMSA_LIDAR_SLAM
+      - /home/nakao/dataset/rosbag/MulRan:/tmp/rosbag
+      - /home/nakao/dataset/evaluation/MulRan/DMSA_LIDAR_SLAM:/tmp/evaluation
+    command: >
+      bash -lc '
+        source /opt/ros/noetic/setup.bash &&
+        roscore & sleep 2 &&
+        mkdir -p "$$SAVE_PATH" &&
+        roslaunch dmsa_slam_ros mulran.launch bag_dirs:="$$BAG_PATH" result_dir:="$$SAVE_PATH" max_distance_ds:=30
+      '
+
+  Riverside01_30:
+    image: dmsa_lidar_slam
+    tty: true
+    stdin_open: true
+    privileged: true
+    gpus: all
+    networks:
+      rosnet:
+        ipv4_address: 172.30.0.37
+    environment:
+      - DISPLAY=${DISPLAY}
+      - ROS_IP=172.30.0.37
+      - ROS_MASTER_URI=http://172.30.0.37:11311
+      - BAG_PATH=/tmp/rosbag/Riverside01.bag
+      - SAVE_PATH=/tmp/evaluation/Riverside01_30
+    volumes:
+      - ${HOME}/.Xauthority:/root/.Xauthority:rw
+      - ..:/root/catkin_ws/src/DMSA_LIDAR_SLAM
+      - /home/nakao/dataset/rosbag/MulRan:/tmp/rosbag
+      - /home/nakao/dataset/evaluation/MulRan/DMSA_LIDAR_SLAM:/tmp/evaluation
+    command: >
+      bash -lc '
+        source /opt/ros/noetic/setup.bash &&
+        roscore & sleep 2 &&
+        mkdir -p "$$SAVE_PATH" &&
+        roslaunch dmsa_slam_ros mulran.launch bag_dirs:="$$BAG_PATH" result_dir:="$$SAVE_PATH" max_distance_ds:=30
+      '
+
+  Riverside02_30:
+    image: dmsa_lidar_slam
+    tty: true
+    stdin_open: true
+    privileged: true
+    gpus: all
+    networks:
+      rosnet:
+        ipv4_address: 172.30.0.38
+    environment:
+      - DISPLAY=${DISPLAY}
+      - ROS_IP=172.30.0.38
+      - ROS_MASTER_URI=http://172.30.0.38:11311
+      - BAG_PATH=/tmp/rosbag/Riverside02.bag
+      - SAVE_PATH=/tmp/evaluation/Riverside02_30
+    volumes:
+      - ${HOME}/.Xauthority:/root/.Xauthority:rw
+      - ..:/root/catkin_ws/src/DMSA_LIDAR_SLAM
+      - /home/nakao/dataset/rosbag/MulRan:/tmp/rosbag
+      - /home/nakao/dataset/evaluation/MulRan/DMSA_LIDAR_SLAM:/tmp/evaluation
+    command: >
+      bash -lc '
+        source /opt/ros/noetic/setup.bash &&
+        roscore & sleep 2 &&
+        mkdir -p "$$SAVE_PATH" &&
+        roslaunch dmsa_slam_ros mulran.launch bag_dirs:="$$BAG_PATH" result_dir:="$$SAVE_PATH" max_distance_ds:=30
+      '
+
+  Riverside03_30:
+    image: dmsa_lidar_slam
+    tty: true
+    stdin_open: true
+    privileged: true
+    gpus: all
+    networks:
+      rosnet:
+        ipv4_address: 172.30.0.39
+    environment:
+      - DISPLAY=${DISPLAY}
+      - ROS_IP=172.30.0.39
+      - ROS_MASTER_URI=http://172.30.0.39:11311
+      - BAG_PATH=/tmp/rosbag/Riverside03.bag
+      - SAVE_PATH=/tmp/evaluation/Riverside03_30
+    volumes:
+      - ${HOME}/.Xauthority:/root/.Xauthority:rw
+      - ..:/root/catkin_ws/src/DMSA_LIDAR_SLAM
+      - /home/nakao/dataset/rosbag/MulRan:/tmp/rosbag
+      - /home/nakao/dataset/evaluation/MulRan/DMSA_LIDAR_SLAM:/tmp/evaluation
+    command: >
+      bash -lc '
+        source /opt/ros/noetic/setup.bash &&
+        roscore & sleep 2 &&
+        mkdir -p "$$SAVE_PATH" &&
+        roslaunch dmsa_slam_ros mulran.launch bag_dirs:="$$BAG_PATH" result_dir:="$$SAVE_PATH" max_distance_ds:=30
+      '
 
 networks:
   rosnet:
