@@ -457,7 +457,7 @@ void dmsa_slam_ros::callbackPointCloud(const sensor_msgs::PointCloud2::ConstPtr 
         else if (config.sensor == "livoxXYZRTLT_s")
         {
             // stamp and ring
-            memcpy(&tmpStampDouble, &msg->dcata[arrayPosition + msg->fields[6].offset], sizeof(double));
+            memcpy(&tmpStampDouble, &msg->data[arrayPosition + msg->fields[6].offset], sizeof(double));
 
             newPC->at(k).stamp = tmpStampDouble;
 
